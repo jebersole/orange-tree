@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\OrangeTreeRepository;
 use App\Repositories\BucketRepository;
 use App\Repositories\OrangeRepository;
+use Illuminate\Http\Request;
 
 class OrangeTreeController extends Controller
 {
@@ -26,7 +27,27 @@ class OrangeTreeController extends Controller
      */
     public function show()
     {
-        $orangeTree = $this->orangeTreeRepository->getOrCreateOrangeTreeByUserId($this->userId);
+        $orangeTree = $this->orangeTreeRepository->getOrangeTreeByUserId($this->userId);
+        if (!$orangeTree) return response()->json(['message' => 'Orange tree not found'], 400);
+
+        return response()->json($orangeTree);
+    }
+
+    /**
+     * Create a new orange tree.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function create(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+        $id = $request->input('id');
+        $orangeTree = $this->orangeTreeRepository->getOrangeTreeByUserId($id);
+        if ($orangeTree) return response()->json(['message' => 'Orange tree already exists'], 400);
+        $orangeTree = $this->orangeTreeRepository->createOrangeTree($this->userId);
+
         return response()->json($orangeTree);
     }
 
@@ -35,7 +56,7 @@ class OrangeTreeController extends Controller
      * @param string $id orange id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(string $id)
+    public function destroy(string $id)
     {
         $orange = $this->orangeRepository->getOrangeById($id);
         if (!$orange) {

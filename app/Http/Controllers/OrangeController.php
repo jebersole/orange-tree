@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\OrangeRepository;
 use App\Repositories\BucketRepository;
+use Illuminate\Http\Request;
 
 class OrangeController extends Controller
 {
@@ -30,11 +31,15 @@ class OrangeController extends Controller
 
     /**
      * Drag an orange to the bucket
-     * @param string $id orange id
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(string $id)
+    public function update(Request $request)
     {
+        $request->validate([
+            'id' => 'required|integer',
+        ]);
+        $id = $request->input('id');
         $orange = $this->orangeRepository->getOrangeById($id);
         if (!$orange) {
             return response()->json(['message' => 'Orange not found'], 400);

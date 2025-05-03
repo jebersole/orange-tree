@@ -7,25 +7,14 @@ use App\Models\Season;
 class SeasonRepository
 {
     /**
-     * Create a new season for a user if it doesn't exist.
+     * Create a season for a specific user.
      *
      * @param int $userId
-     * @return \App\Models\Season
+     * @return \App\Models\Season|null
      */
-    public function getOrCreateSeasonByUserId(int $userId): Season
+    public function createSeason(int $userId): Season
     {
-        // Check if the season already exists
-        $existingSeason = $this->getSeasonByUserId($userId);
-        if ($existingSeason) {
-            return $existingSeason;
-        }
-
-        // Create a new season if it doesn't exist
-        Season::create([
-            'user_id' => $userId,
-            'current' => 0,
-        ]);
-        return $this->getSeasonByUserId($userId);
+        return Season::create(['user_id' => $userId]);
     }
 
     /**
@@ -36,7 +25,7 @@ class SeasonRepository
      */
     public function advanceSeason(int $userId)
     {
-        $season = $this->getOrCreateSeasonByUserId($userId);
+        $season = $this->getSeasonByUserId($userId);
         $season->advance();
     }
 

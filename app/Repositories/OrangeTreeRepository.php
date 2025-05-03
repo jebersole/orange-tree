@@ -8,33 +8,25 @@ use App\Models\Orange;
 class OrangeTreeRepository
 {
     /**
-     * Get the user's orange tree
+     * Get the user's orange tree.
      *
      * @param int $userId
      * @return int
      */
-    public function getOrCreateOrangeTreeByUserId(int $userId): ?OrangeTree
+    public function getOrangeTreeByUserId(int $userId): ?OrangeTree
     {
-        $tree = OrangeTree::where('user_id', $userId)->with('oranges')->get()->first();
-        if ($tree) return $tree;
-
-        $tree = new OrangeTree;
-        $tree->user_id = $userId;
-        $tree->save();
-        $tree->makeOranges();
-
-        return $tree;
+        return OrangeTree::where('user_id', $userId)->with('oranges')->get()->first();
     }
 
     /**
-     * Find an orange by its ID.
+     * Create a new orange tree for the user.
      *
-     * @param int $id
-     * @return \App\Models\Orange|null
+     * @param int $userId
+     * @return \App\Models\OrangeTree
      */
-    public function getOrangeById(int $id): ?OrangeTree
+    public function createOrangeTree(int $userId): OrangeTree
     {
-        return OrangeTree::find($id);
+        return OrangeTree::create(['user_id' => $userId]);
     }
 
     /**

@@ -9,6 +9,10 @@ class OrangeTree extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id'
+    ];
+
     public function oranges()
     {
         return $this->belongsToMany(Orange::class);
