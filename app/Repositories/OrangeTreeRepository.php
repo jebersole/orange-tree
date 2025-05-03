@@ -19,14 +19,17 @@ class OrangeTreeRepository
     }
 
     /**
-     * Create a new orange tree for the user.
+     * Create a new orange tree for the user with some oranges.
      *
      * @param int $userId
      * @return \App\Models\OrangeTree
      */
     public function createOrangeTree(int $userId): OrangeTree
     {
-        return OrangeTree::create(['user_id' => $userId]);
+        $tree = OrangeTree::create(['user_id' => $userId]);
+        $oranges = Orange::factory()->count(5)->create();
+        $tree->oranges()->sync($oranges->pluck('id'));
+        return $tree->fresh()->load('oranges');
     }
 
     /**
