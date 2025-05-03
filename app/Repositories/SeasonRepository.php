@@ -37,16 +37,7 @@ class SeasonRepository
     public function advanceSeason(int $userId)
     {
         $season = $this->getOrCreateSeasonByUserId($userId);
-        if ($season->current === 3) $season->current = 0;
-        else $season->current += 1;
-        $season->save();
-        if ($season->current === Season::WINTER) {
-            $season->user->tree->killOranges();
-        } elseif ($season->current === Season::SPRING) {
-            $season->user->tree->makeOranges();
-        } elseif ($season->current === Season::AUTUMN) {
-            $season->user->tree->dropOranges();
-        }
+        $season->advance();
     }
 
     /**

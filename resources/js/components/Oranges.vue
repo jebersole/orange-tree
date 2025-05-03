@@ -1,3 +1,8 @@
+// This component is responsible for rendering a list of oranges, either on the tree or on the ground. 
+// Each orange is draggable, and its position is determined by a random transformation applied when it is rendered. 
+// The component accepts props for the list of oranges, whether they are on the ground, 
+// and a function to handle the dragstart event. Transformations are stored to ensure consistent positioning.
+
 <template>
     <div v-for="orange in oranges" :key="orange.id"
         :class="['orange', 'fallen']" :style="transform(orange)"

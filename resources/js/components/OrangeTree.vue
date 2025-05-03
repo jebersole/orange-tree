@@ -1,3 +1,9 @@
+// This component represents the main Orange Tree interface. It manages the state of the tree, 
+// including oranges on the tree, oranges on the ground, and oranges in the bucket. 
+// It interacts with the backend API to load the tree, move oranges to the bucket, 
+// eat oranges, and advance the season. The component also uses the Oranges child component 
+// to render individual oranges on the tree and ground.
+
 <template>
     <div class="orange-tree-container" :class="currentSeason">
         <div class="tree-container">
