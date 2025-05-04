@@ -8,7 +8,7 @@
     <div class="orange-tree-container" :class="currentSeason">
         <div class="tree-container">
             <div class="tree">
-                <div class="trunk"></div>
+                <img src="../../images/orange_tree.png" alt="Orange Tree" class="tree-image" />
                 <div class="foliage">
                     <Oranges :oranges="oranges" :onGround="false" :startDragging="startDragging" />
                 </div>
@@ -19,23 +19,19 @@
                 <Oranges :oranges="orangesOnGround" :onGround="true" :startDragging="startDragging" />
             </div>
         </div>
+    </div>
+    <div class="bucket-container" @dragover.prevent @drop="dropInBucket">
+        <div class="bucket"></div>
+        <div class="orange-count">Oranges: {{ bucket.length }}</div>
+    </div>
 
-        <div class="bucket-container" @dragover.prevent @drop="dropInBucket">
-            <div class="bucket">
-                <div class="bucket-top"></div>
-                <div class="bucket-body"></div>
-            </div>
-            <div class="orange-count">Oranges: {{ bucket.length }}</div>
-        </div>
-
-        <div class="controls">
-            <button @click="eatOrange" :disabled="!bucket.length" class="eat-button">
-                Eat an Orange
-            </button>
-            <button @click="advanceSeason" class="season-button">
-                Wait for {{ nextSeason }}
-            </button>
-        </div>
+    <div class="controls">
+        <button @click="eatOrange" :disabled="!bucket.length" class="eat-button">
+            Eat an Orange
+        </button>
+        <button @click="advanceSeason" class="season-button">
+            Wait for {{ nextSeason }}
+        </button>
     </div>
 </template>
 

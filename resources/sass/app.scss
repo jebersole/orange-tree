@@ -38,10 +38,6 @@ body {
     &.winter {
         background: linear-gradient(to bottom, #B0E0E6, #FFFFFF);
 
-        .grass {
-            background: #FFFFFF;
-        }
-
         .ground::after {
             content: '';
             position: absolute;
@@ -49,8 +45,8 @@ body {
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.8);
-            pointer-events: none;
+            background: url('../images/snowy_grass.png') no-repeat center center;
+            background-size: cover;
         }
     }
 }
@@ -64,34 +60,24 @@ body {
 
     .tree {
         position: relative;
-        width: 400px;
+        width: 600px;
         height: 600px;
         margin-bottom: 50px;
+        background-size: cover;
 
-        .trunk {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 200px;
-            background: linear-gradient(90deg, #8B4513, #A0522D);
-            border-radius: 10px;
+        .tree-image {
+            width: 600px;
+            width: 800px;
+            bottom: 270px;
+            position: relative;
         }
 
         .foliage {
             position: absolute;
-            bottom: 180px;
+            bottom: 280px;
             left: 50%;
             transform: translateX(-50%);
-            width: 300px;
-            height: 400px;
-            background: #228B22;
             border-radius: 200px 200px 120px 120px;
-            box-shadow:
-                -50px 0 #228B22,
-                50px 0 #228B22,
-                0 -50px #228B22;
         }
     }
 }
@@ -100,23 +86,13 @@ body {
     position: absolute;
     width: 30px;
     height: 30px;
-    background: #FFA500;
+    background: url('../images/orange.png') no-repeat center center;
+    background-size: cover;
     border-radius: 50%;
     cursor: move;
     transition: all 0.5s ease;
     box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.3);
     z-index: 2;
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 3px;
-        left: 15px;
-        width: 4px;
-        height: 8px;
-        background: #228B22;
-        border-radius: 2px;
-    }
 
     &.falling {
         animation: fall 1.5s cubic-bezier(.45, .05, .55, .95) forwards;
@@ -125,7 +101,8 @@ body {
 
     &.fallen {
         position: absolute;
-        bottom: 40px;
+        bottom: 240px;
+        left: 200px;
         transition: all 0.5s ease-out;
         z-index: 3;
     }
@@ -137,13 +114,16 @@ body {
     width: 100%;
     height: 100px;
     overflow: visible;
+    bottom: -25%;
+    height: 48%;
 
     .grass {
         position: absolute;
         bottom: 0;
         width: 100%;
         height: 100%;
-        background: #228B22;
+        background: url('../images/grass.png') no-repeat center center;
+        background-size: cover;
     }
 }
 
@@ -161,24 +141,8 @@ body {
         width: 100%;
         height: 100%;
         position: relative;
-
-        .bucket-top {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 20px;
-            background: #8B4513;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .bucket-body {
-            position: absolute;
-            top: 20px;
-            width: 100%;
-            height: calc(100% - 20px);
-            background: linear-gradient(90deg, #A0522D, #8B4513);
-            border-radius: 5px 5px 20px 20px;
-        }
+        background: url('../images/basket.png') no-repeat center center;
+        background-size: cover;
     }
 
     .orange-count {
